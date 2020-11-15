@@ -60,6 +60,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
         src/visualizer/tile_board.cc)
 
 list(APPEND TEST_FILES tests/test_player.cpp)
+list(APPEND TEST_FILES tests/test_game_board.cpp)
 
 ci_make_app(
         APP_NAME        simulator

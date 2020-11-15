@@ -9,8 +9,10 @@ namespace deviousdungeon {
 namespace tile {
 class PortalTile : public Tile {
  public:
-  PortalTile();
+  PortalTile() = default;
   TileType GetTileType();
+  ImageSourceRef GetImage();
+  void OnEnter(Player& player);
  private:
   TileType tile_type_ = kPortalTile;
 };

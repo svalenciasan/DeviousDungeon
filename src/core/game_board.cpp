@@ -12,6 +12,10 @@ using std::rand;
 using deviousdungeon::player::Player;
 using deviousdungeon::tile::Tile;
 using deviousdungeon::tile::PortalTile;
+using deviousdungeon::tile::EnemyTile;
+using deviousdungeon::tile::HealthTile;
+using deviousdungeon::tile::WeaponTile;
+using deviousdungeon::tile::GoldTile;
 
 
 using deviousdungeon::gameboard::GameBoard;
@@ -19,23 +23,23 @@ using deviousdungeon::gameboard::GameBoard;
 namespace deviousdungeon {
 
 namespace gameboard {
-GameBoard::GameBoard(const vec2& dimensions) {
+GameBoard::GameBoard(const size_t rows, const size_t columns) {
   probability_of_tile_[tile::kEnemy_Tile] = 10;
-  probability_of_tile_[tile::kWeapon_Tile] = 8;
-  probability_of_tile_[tile::kGold_Tile] = 3;
-  probability_of_tile_[tile::kHealth_Tile] = 5;
+  probability_of_tile_[tile::kWeapon_Tile] = 7;
+  probability_of_tile_[tile::kGold_Tile] = 4;
+  probability_of_tile_[tile::kHealth_Tile] = 3;
 
-  board_.resize(static_cast<size_t>(dimensions.y));
-  for (size_t row = 0; row < dimensions.y; row++) {
-    board_.at(row).resize(static_cast<size_t>(dimensions.x));
+  board_.resize(static_cast<size_t>(rows));
+  for (size_t row = 0; row < rows; row++) {
+    board_.at(row).resize(static_cast<size_t>(columns));
   }
   GenerateRandomBoard();
 }
 vector<vector<Tile>> GameBoard::GenerateRandomBoard() {
-//  //Randomizing the exit portal;
-//  PortalTile portal_tile;
-//  size_t portal_spawn = rand()%board_[0].size();
-//  board_[0][portal_spawn] = portal_tile;
+  //Randomizing the exit portal;
+  PortalTile portal_tile;
+  size_t portal_spawn = rand()%board_[0].size();
+  //board_[0][portal_spawn] = portal_tile;
   //Splitting map into tiles and weight vectors
   vector<tile::TileType> tiles;
   vector<double> weights;
@@ -48,17 +52,30 @@ vector<vector<Tile>> GameBoard::GenerateRandomBoard() {
   std::mt19937 gen;
   gen.seed(static_cast<size_t>(time(0)));
 
-  size_t number_of_squares = board_.size() * board_.at(0).size();
-  std::vector<int> samples(number_of_squares);
-  for(auto& i: samples) {
-    i = dist(gen);
-  }
+  for (size_t row = 0; row < board_.size(); row++) {
+    for (size_t column = 0; column < board_[row].size(); column++) {
+      if(row == 0 && column == portal_spawn) {
+        continue;
+      }
+//      switch (dist(gen)) {
+//        case tile::kEnemy_Tile:
+//          board_[row][column] = EnemyTile();
+//          break;
 //
-//  for (size_t row = 0; row < height; row++) {
-//    for (size_t column = 0; column < height; column++) {
-//      probability_of_tile_;
-//    }
-//  }
+//        case tile::kWeapon_Tile:
+//          board_[row][column] = WeaponTile();
+//          break;
+//
+//        case tile::kGold_Tile:
+//          board_[row][column] = GoldTile();
+//          break;
+//
+//        case tile::kHealth_Tile:
+//          board_[row][column] = HealthTile();
+//          break;
+//      }
+    }
+  }
 return board_;
 }
 }//namespace gameboard

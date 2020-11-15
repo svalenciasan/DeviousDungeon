@@ -15,8 +15,8 @@ namespace deviousdungeon {
 namespace gameboard {
 class GameBoard {
  public:
-  //Creates a board of that size;
-  GameBoard(const vec2& dimensions);
+  //Creates a board with those dimensions.
+  GameBoard(const size_t rows, const size_t columns);
   //Returns player location
   vec2 Move();
  private:

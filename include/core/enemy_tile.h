@@ -11,6 +11,7 @@ namespace deviousdungeon {
 namespace tile {
 class EnemyTile : public Tile {
  public:
+  EnemyTile();
   EnemyTile(Enemy enemy);
   void OnEnter(Player& player);
   TileType GetTileType();
