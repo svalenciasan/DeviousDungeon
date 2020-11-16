@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "player.h"
+#include "core/player.h"
 
 using cinder::vec2;
 using cinder::ImageSourceRef;
@@ -20,10 +20,10 @@ enum TileType {
 };
 class Tile {
  public:
-  void OnEnter(Player& player);
-  TileType GetTileType();
-  ImageSourceRef GetImage();
+  //void OnEnter(Player& player);
+  virtual TileType GetTileType() = 0;
+  virtual ImageSourceRef GetImage() = 0;
  private:
 };
+}//namespace tile
 }//namespace deviousdungeon
-}//namespace player

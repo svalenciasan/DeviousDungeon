@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "tile.h"
+#include "core/tiles/tile.h"
 
 using deviousdungeon::tile::Tile;
 
@@ -12,11 +12,13 @@ class HealthTile : public Tile {
   //Random heal.
   HealthTile();
   HealthTile(size_t heal);
+
   void OnEnter(Player& player);
-  TileType GetTileType();
+  TileType GetTileType() override;
+  ImageSourceRef GetImage() override;
  private:
   size_t heal_;
   TileType tile_type_ = kHealth_Tile;
 };
 }//namespace deviousdungeon
-}//namespace player
+}//namespace tile

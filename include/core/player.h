@@ -22,5 +22,5 @@ class Player {
 //  Weapon melee_weapon = Weapon(weapon::kMeleeWeapon, 0);
 //  Weapon ranged_weapon = Weapon(weapon::kRangedWeapon, 0);
 };
-}//namespace deviousdungeon
 }//namespace player
+}//namespace deviousdungeon

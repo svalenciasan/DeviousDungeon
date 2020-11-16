@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "tile.h"
+#include "core/tiles/tile.h"
 
 using deviousdungeon::tile::Tile;
 
@@ -12,11 +12,13 @@ class WeaponTile : public Tile {
   //Random heal.
   WeaponTile();
   WeaponTile(Weapon weapon);
+
   void OnEnter(Player& player);
-  TileType GetTileType();
+  TileType GetTileType() override;
+  ImageSourceRef GetImage() override;
  private:
   Weapon weapon_;
   TileType tile_type_ = kWeapon_Tile;
 };
+}//namespace tile
 }//namespace deviousdungeon
-}//namespace player

@@ -1,6 +1,10 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "core/game_board.h"
+
+using deviousdungeon::gameboard::GameBoard;
+//using ci::gl::Texture;
 
 namespace deviousdungeon {
 
@@ -8,13 +12,20 @@ namespace visualizer {
 
 class TileBoard {
  public:
-  TileBoard();
+  TileBoard() = default;
+
+  TileBoard(const vec2& top_left_corner, const vec2& bottom_right_corner);
 
   void Update();
 
   void Draw() const;
 
  private:
+  vec2 top_left_corner_;
+  vec2 bottom_right_corner_;
+  size_t board_size_ = 5;
+  GameBoard game_board_;
+  double tile_pixel_length_;
 };
 
 }  // namespace visualizer

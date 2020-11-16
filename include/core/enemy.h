@@ -10,9 +10,9 @@ class Enemy {
   Enemy();
   Enemy(size_t power);
   size_t GetPower();
-  size_t SetPower();
+  size_t SetPower(size_t power);
  private:
   size_t power_;
 };
-}//namespace deviousdungeon
 }//namespace enemy
+}//namespace deviousdungeon

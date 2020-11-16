@@ -9,5 +9,5 @@ namespace player {
 //  if ()
 //  return health_ -= power
 //}
-}
-}
+}//namespace player
+}//namespace deviousdungeon

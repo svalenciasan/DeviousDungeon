@@ -50,9 +50,16 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 list(APPEND CORE_SOURCE_FILES src/core/player.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/enemy.cpp)
 list(APPEND CORE_SOURCE_FILES src/core/weapon.cpp)
 list(APPEND CORE_SOURCE_FILES src/core/game_board.cpp)
-list(APPEND CORE_SOURCE_FILES src/core/portal_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/portal_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/spawn_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/health_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/weapon_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/enemy_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/empty_tile.cpp)
+list(APPEND CORE_SOURCE_FILES src/core/tiles/gold_tile.cpp)
 
 
 list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
@@ -63,7 +70,7 @@ list(APPEND TEST_FILES tests/test_player.cpp)
 list(APPEND TEST_FILES tests/test_game_board.cpp)
 
 ci_make_app(
-        APP_NAME        simulator
+        APP_NAME        deviousdungeon
         CINDER_PATH     ${CINDER_PATH}
         SOURCES         apps/cinder_app_main.cc ${SOURCE_FILES}
         INCLUDES        include

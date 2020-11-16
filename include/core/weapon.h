@@ -19,5 +19,5 @@ class Weapon {
   size_t power_;
   WeaponType weapon_type_;
 };
-}//namespace deviousdungeon
 }//namespace weapon
+}//namespace deviousdungeon

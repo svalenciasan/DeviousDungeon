@@ -16,6 +16,11 @@ class DeviousDungeonApp : public ci::app::App {
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
  private:
+  const double kWindowSize = 900;
+  const double kSideMargin = kWindowSize * .15;
+  const double kUpperMargin = kWindowSize * .12;
+  const double kLowerMargin = kWindowSize * .18;
+  TileBoard tile_board_;
 };
 
 }//namespace visualizer

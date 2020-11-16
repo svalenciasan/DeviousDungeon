@@ -1,7 +1,7 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
-#include "tile.h"
+#include "core/tiles/tile.h"
 
 using deviousdungeon::tile::Tile;
 
@@ -12,11 +12,13 @@ class GoldTile : public Tile {
   //Random gold.
   GoldTile();
   GoldTile(size_t gold);
+
   void OnEnter(Player& player);
-  TileType GetTileType();
+  TileType GetTileType() override;
+  ImageSourceRef GetImage() override;
  private:
   size_t gold_;
   TileType tile_type_ = kGold_Tile;
 };
+}//namespace tile
 }//namespace deviousdungeon
-}//namespace player
