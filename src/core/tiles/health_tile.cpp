@@ -17,7 +17,7 @@ TileType HealthTile::GetTileType() {
 }
 
 ImageSourceRef HealthTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  return ci::loadImage("collectibles/Potion.png");
 }
 }//namespace tile
 }//namespace deviousdungeon

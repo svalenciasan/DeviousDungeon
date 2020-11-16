@@ -10,7 +10,7 @@ TileType PortalTile::GetTileType() {
 }
 
 ImageSourceRef PortalTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  return ci::loadImage("other/Portal.png");
 }
 }//namespace tile
 }//namespace deviousdungeon

@@ -10,7 +10,7 @@ TileType SpawnTile::GetTileType() {
 }
 
 ImageSourceRef SpawnTile::GetImage() {
-  return ci::loadImage("Mummy.png");
+  return ci::loadImage("player/Player.png");
 }
 }//namespace tile
 }//namespace deviousdungeon

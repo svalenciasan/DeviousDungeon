@@ -17,7 +17,11 @@ TileType WeaponTile::GetTileType() {
 }
 
 ImageSourceRef WeaponTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  if ((rand() % 10) % 2 == 0) {
+    return ci::loadImage("weapons/Sword.png");
+  } else {
+    return ci::loadImage("weapons/Bow.png");
+  }
 }
 }//namespace tile
 }//namespace deviousdungeon

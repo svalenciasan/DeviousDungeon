@@ -20,6 +20,42 @@ GameBoard::GameBoard(const size_t rows, const size_t columns) {
   GenerateRandomBoard();
 }
 
+vec2 GameBoard::Move(Direction direction) {
+  size_t lower_bound = board_.size() - 1;
+  size_t right_bound = board_[lower_bound].size() - 1;
+
+  switch (direction) {
+    case kUp:
+      if (player_location_.y == 0) {
+        break;
+      }
+      player_location_ -= vec2(0,1);
+      break;
+
+    case kDown:
+      if (player_location_.y == lower_bound) {
+        break;
+      }
+      player_location_ += vec2(0,1);
+      break;
+
+    case kLeft:
+      if (player_location_.x == 0) {
+        break;
+      }
+      player_location_ -= vec2(1,0);
+      break;
+
+    case kRight:
+      if (player_location_.x == right_bound) {
+        break;
+      }
+      player_location_ += vec2(1,0);
+      break;
+  }
+  return player_location_;
+}
+
 /**
  * Getters/Setters
  */
@@ -30,6 +66,12 @@ GameBoard::GameBoard(const size_t rows, const size_t columns) {
  vec2 GameBoard::GetPlayerLocation() const {
    return player_location_;
  }
+ //Private
+ vec2 GameBoard::MakeEmptyTile(vec2 location) {
+   //Tile*& ptr = board_[location.y][location.x];
+   return location;
+ }
+
 /**
  * Procedural Generation
  */
@@ -46,7 +88,7 @@ GameBoard::GameBoard(const size_t rows, const size_t columns) {
   size_t spawn_location = rand() % board_[board_.size() - 1].size();
   SpawnTile* spawn_tile = new SpawnTile();
   board_[board_.size() - 1][spawn_location] = spawn_tile;
-  player_location_ = vec2(board_.size() - 1, spawn_location);
+  player_location_ = vec2(spawn_location, board_.size() - 1);
   return spawn_location;
  }
  vector<vector<Tile*>> GameBoard::GenerateRandomBoard() {

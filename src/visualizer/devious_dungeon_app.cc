@@ -24,16 +24,19 @@ void DeviousDungeonApp::draw() {
 void DeviousDungeonApp::keyDown(ci::app::KeyEvent event) {
   switch (event.getCode()) {
     case ci::app::KeyEvent::KEY_w:
+      tile_board_.HandleMovement(gameboard::kUp);
       break;
 
     case ci::app::KeyEvent::KEY_s:
-
+      tile_board_.HandleMovement(gameboard::kDown);
       break;
 
     case ci::app::KeyEvent::KEY_a:
+      tile_board_.HandleMovement(gameboard::kLeft);
       break;
 
     case ci::app::KeyEvent::KEY_d:
+      tile_board_.HandleMovement(gameboard::kRight);
       break;
   }
 }

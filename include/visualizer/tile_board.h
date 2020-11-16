@@ -20,6 +20,7 @@ class TileBoard {
 
   void Draw() const;
 
+  void HandleMovement(gameboard::Direction direction);
  private:
   vec2 top_left_corner_;
   vec2 bottom_right_corner_;

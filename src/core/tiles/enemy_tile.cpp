@@ -18,7 +18,7 @@ TileType EnemyTile::GetTileType() {
 }
 
 ImageSourceRef EnemyTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  return ci::loadImage("enemies/Hyena.png");
 }
 }//namespace tile
 }//namespace deviousdungeon

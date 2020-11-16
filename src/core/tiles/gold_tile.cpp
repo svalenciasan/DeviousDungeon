@@ -17,7 +17,7 @@ TileType GoldTile::GetTileType() {
 }
 
 ImageSourceRef GoldTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  return ci::loadImage("collectibles/Coins.png");
 }
 }//namespace tile
 }//namespace deviousdungeon

@@ -10,7 +10,7 @@ TileType EmptyTile::GetTileType() {
 }
 
 ImageSourceRef EmptyTile::GetImage() {
-  return ci::loadImage("Hyena.png");
+  return ci::loadImage("other/Empty.png");
 }
 }//namespace tile
 }//namespace deviousdungeon
