@@ -14,6 +14,7 @@ class GoldTile : public Tile {
   GoldTile(size_t gold);
 
   void OnEnter(Player& player);
+  size_t GetGold() const;
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
  private:

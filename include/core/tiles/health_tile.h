@@ -14,6 +14,7 @@ class HealthTile : public Tile {
   HealthTile(size_t heal);
 
   void OnEnter(Player& player);
+  size_t GetHeal();
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
  private:

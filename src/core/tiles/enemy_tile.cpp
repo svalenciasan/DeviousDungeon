@@ -13,6 +13,10 @@ EnemyTile::EnemyTile(Enemy enemy) {
   enemy_ = enemy;
 }
 
+size_t EnemyTile::GetEnemyPower() {
+  return enemy_.GetPower();
+}
+
 TileType EnemyTile::GetTileType() {
   return tile_type_;
 }

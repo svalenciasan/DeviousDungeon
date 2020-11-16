@@ -9,11 +9,11 @@ namespace deviousdungeon {
 namespace tile {
 class WeaponTile : public Tile {
  public:
-  //Random heal.
   WeaponTile();
   WeaponTile(Weapon weapon);
 
   void OnEnter(Player& player);
+  size_t GetWeaponPower();
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
  private:

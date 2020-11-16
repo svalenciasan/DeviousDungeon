@@ -15,6 +15,7 @@ class Weapon {
   Weapon(WeaponType weapon_type);
   Weapon(WeaponType weapon_type, size_t power);
   size_t UseWeapon(size_t other_power);
+  size_t GetPower();
  private:
   size_t power_;
   WeaponType weapon_type_;

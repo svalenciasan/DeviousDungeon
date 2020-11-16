@@ -12,6 +12,10 @@ HealthTile::HealthTile(size_t heal) {
   heal_ = heal;
 }
 
+size_t HealthTile::GetHeal() {
+  return heal_;
+}
+
 TileType HealthTile::GetTileType() {
   return tile_type_;
 }

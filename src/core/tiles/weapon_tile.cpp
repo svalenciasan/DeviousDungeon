@@ -12,6 +12,10 @@ WeaponTile::WeaponTile(Weapon weapon) {
   weapon_ = Weapon();
 }
 
+size_t WeaponTile::GetWeaponPower() {
+  return weapon_.GetPower();
+}
+
 TileType WeaponTile::GetTileType() {
   return tile_type_;
 }

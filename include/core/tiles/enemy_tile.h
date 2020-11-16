@@ -15,6 +15,7 @@ class EnemyTile : public Tile {
   EnemyTile(Enemy enemy);
 
   void OnEnter(Player& player);
+  size_t GetEnemyPower();
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
  private:

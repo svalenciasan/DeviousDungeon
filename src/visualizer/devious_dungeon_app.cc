@@ -15,7 +15,8 @@ void DeviousDungeonApp::update() {
 
 void DeviousDungeonApp::draw() {
   //Dark blue-purple
-  ci::Color8u background_color(96, 96, 86);
+  //ci::Color8u background_color(96, 96, 86);
+  ci::Color8u background_color(255, 178, 102);
   ci::gl::clear(background_color);
 
   tile_board_.Draw();

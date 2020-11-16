@@ -29,6 +29,7 @@ vec2 GameBoard::Move(Direction direction) {
       if (player_location_.y == 0) {
         break;
       }
+      MakeEmptyTile(player_location_);
       player_location_ -= vec2(0,1);
       break;
 
@@ -36,6 +37,7 @@ vec2 GameBoard::Move(Direction direction) {
       if (player_location_.y == lower_bound) {
         break;
       }
+      MakeEmptyTile(player_location_);
       player_location_ += vec2(0,1);
       break;
 
@@ -43,6 +45,7 @@ vec2 GameBoard::Move(Direction direction) {
       if (player_location_.x == 0) {
         break;
       }
+      MakeEmptyTile(player_location_);
       player_location_ -= vec2(1,0);
       break;
 
@@ -50,6 +53,7 @@ vec2 GameBoard::Move(Direction direction) {
       if (player_location_.x == right_bound) {
         break;
       }
+      MakeEmptyTile(player_location_);
       player_location_ += vec2(1,0);
       break;
   }
@@ -68,7 +72,9 @@ vec2 GameBoard::Move(Direction direction) {
  }
  //Private
  vec2 GameBoard::MakeEmptyTile(vec2 location) {
-   //Tile*& ptr = board_[location.y][location.x];
+   delete board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)];
+   EmptyTile* empty_tile = new EmptyTile();
+   board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)] = empty_tile;
    return location;
  }
 
