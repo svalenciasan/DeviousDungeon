@@ -44,6 +44,9 @@ vector<vector<Tile*>> ProceduralGeneration::GenerateRandomBoard(size_t rows, siz
   size_t seed = static_cast<size_t>(time(0));
   seeds_.push_back(seed);
   srand(seed);
+  //Adding portal and spawn
+  GenerateRandomSpawn(board);
+  GenerateRandomPortal(board);
   //Splitting map into tiles and weight vectors
   vector<tile::TileType> tiles;
   vector<double> weights;
@@ -99,7 +102,8 @@ Enemy ProceduralGeneration::GenerateRandomEnemy() {
   //Creating the discrete distribution. Weighted probability.
   std::discrete_distribution<int> dist(begin(weights), end(weights));
   std::mt19937 gen;
-  gen.seed(seeds_.back());
+  gen.seed(rand());
+
   return Enemy(power.at(dist(gen)));
 }
 Weapon ProceduralGeneration::GenerateRandomWeapon() {
@@ -109,7 +113,7 @@ Weapon ProceduralGeneration::GenerateRandomWeapon() {
 /**
  * Getters/Setters
  */
-size_t ProceduralGeneration::AddSeed(size_t seed) {
+void ProceduralGeneration::AddSeed(size_t seed) {
   seeds_.push_back(seed);
 }
 
@@ -129,12 +133,10 @@ size_t ProceduralGeneration::GenerateRandomPortal(vector<vector<Tile*>>& board) 
 }
 
 size_t ProceduralGeneration::GenerateRandomSpawn(vector<vector<Tile*>>& board) {
-  srand(rand());
   //Randomizing the spawn point at last row
   size_t spawn_location = rand() % board[board.size() - 1].size();
   SpawnTile* spawn_tile = new SpawnTile();
   board[board.size() - 1][spawn_location] = spawn_tile;
-  srand(seeds_.back());
   return spawn_location;
 }
 
@@ -148,7 +150,7 @@ weapon::WeaponType ProceduralGeneration::GenerateRandomWeaponType() {
   //Creating the discrete distribution. Weighted probability.
   std::discrete_distribution<int> dist(begin(weapon_type_weights), end(weapon_type_weights));
   std::mt19937 gen;
-  gen.seed(seeds_.back());
+  gen.seed(rand());
 
   return weapon_type.at(dist(gen));
 }
@@ -175,7 +177,7 @@ size_t ProceduralGeneration::GenerateRandomWeaponPower(weapon::WeaponType type) 
   //Creating the discrete distribution. Weighted probability.
   std::discrete_distribution<int> dist(begin(weights), end(weights));
   std::mt19937 gen;
-  gen.seed(seeds_.back());
+  gen.seed(rand());
 
   return power.at(dist(gen));
 }

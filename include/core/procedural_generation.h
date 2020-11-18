@@ -35,13 +35,23 @@ class ProceduralGeneration {
   //ProceduralGeneration(size_t rows, size_t columns);
 
   vector<vector<Tile*>> GenerateRandomBoard(size_t rows, size_t columns);
+  /**
+ * Adds random portal location to board.
+ * @return Portal column location.
+ */
+  size_t GenerateRandomPortal(vector<vector<Tile*>>& board);
+  /**
+   * Adds random spawn location to board.
+   * @return Spawn column location.
+   */
+  size_t GenerateRandomSpawn(vector<vector<Tile*>>& board);
   Enemy GenerateRandomEnemy();
   Weapon GenerateRandomWeapon();
   /**
    * Getters/Setters.
    */
   vector<size_t> GetSeeds() const;
-  size_t AddSeed(size_t seed);
+  void AddSeed(size_t seed);
  private:
   //Probability of each tile being chosen during board generation.
   map<tile::TileType, double> probability_of_tile_;
@@ -56,16 +66,6 @@ class ProceduralGeneration {
    */
   vector<size_t> seeds_;
   //Private helper
-  /**
-   * Adds random portal location to board.
-   * @return Portal column location.
-   */
-  size_t GenerateRandomPortal(vector<vector<Tile*>>& board);
-  /**
-   * Adds random spawn location to board.
-   * @return Spawn column location.
-   */
-  size_t GenerateRandomSpawn(vector<vector<Tile*>>& board);
   size_t GenerateRandomWeaponPower(weapon::WeaponType type);
   weapon::WeaponType GenerateRandomWeaponType();
 };

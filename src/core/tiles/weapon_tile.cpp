@@ -9,7 +9,7 @@ WeaponTile::WeaponTile() {
   weapon_ = Weapon(weapon::kMeleeWeapon);
 }
 WeaponTile::WeaponTile(Weapon weapon) {
-  weapon_ = Weapon();
+  weapon_ = weapon;
 }
 
 size_t WeaponTile::GetWeaponPower() {
