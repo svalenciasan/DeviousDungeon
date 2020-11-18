@@ -33,7 +33,12 @@ class ProceduralGeneration {
  public:
   ProceduralGeneration();
   //ProceduralGeneration(size_t rows, size_t columns);
-
+/**
+ * Creates a board with procedurally generated tiles.
+ * @param rows
+ * @param columns
+ * @return
+ */
   vector<vector<Tile*>> GenerateRandomBoard(size_t rows, size_t columns);
   /**
  * Adds random portal location to board.
@@ -45,7 +50,15 @@ class ProceduralGeneration {
    * @return Spawn column location.
    */
   size_t GenerateRandomSpawn(vector<vector<Tile*>>& board);
+  /**
+   * Creates a random enemy with a random power value.
+   * @return
+   */
   Enemy GenerateRandomEnemy();
+  /**
+   * Creates a random weapon with a random power value.
+   * @return
+   */
   Weapon GenerateRandomWeapon();
   /**
    * Getters/Setters.
@@ -66,7 +79,16 @@ class ProceduralGeneration {
    */
   vector<size_t> seeds_;
   //Private helper
+  /**
+   * Returns a random power level according to the weapon type.
+   * @param type
+   * @return
+   */
   size_t GenerateRandomWeaponPower(weapon::WeaponType type);
+  /**
+   * Returns a random weapon type.
+   * @return
+   */
   weapon::WeaponType GenerateRandomWeaponType();
 };
 }//namespace procedural_generation
