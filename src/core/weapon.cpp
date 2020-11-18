@@ -19,5 +19,9 @@ size_t Weapon::UseWeapon(size_t other_power) {
 size_t Weapon::GetPower() {
   return power_;
 }
+
+WeaponType Weapon::GetType() {
+  return weapon_type_;
+}
 }//namespace weapon
 }//namespace deviousdungeon

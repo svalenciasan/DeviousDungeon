@@ -21,7 +21,7 @@ TileType WeaponTile::GetTileType() {
 }
 
 ImageSourceRef WeaponTile::GetImage() {
-  if ((rand() % 10) % 2 == 0) {
+  if (weapon_.GetType() == weapon::kMeleeWeapon) {
     return ci::loadImage("weapons/Sword.png");
   } else {
     return ci::loadImage("weapons/Bow.png");

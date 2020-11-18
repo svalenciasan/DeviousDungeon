@@ -122,7 +122,8 @@ vec2 GameBoard::Move(Direction direction) {
 
    for (size_t row = 0; row < board_.size(); row++) {
      for (size_t column = 0; column < board_[row].size(); column++) {
-       if (row == 0 && column == portal_location || row == board_.size() - 1 && column == spawn_location) {
+       if (board_[row][column] != NULL &&
+       (board_[row][column]->GetTileType() == tile::kSpawnTile || board_[row][column]->GetTileType() == tile::kPortalTile)) {
          continue;
        }
        switch (tiles.at(dist(gen))) {
