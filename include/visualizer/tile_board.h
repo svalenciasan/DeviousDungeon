@@ -1,8 +1,12 @@
 #pragma once
 
 #include "cinder/gl/gl.h"
+#include "cinder/Font.h"
 #include "core/game_board.h"
+#include <iostream>
+#include <string>
 
+using std::string;
 using deviousdungeon::gameboard::GameBoard;
 //using ci::gl::Texture;
 

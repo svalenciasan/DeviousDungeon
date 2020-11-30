@@ -25,6 +25,41 @@ void TileBoard::Draw() const {
       vec2 bottom_right_picture_bound = vec2(top_left_corner_.x + tile_pixel_length_, top_left_corner_.y) + vec2(column * tile_pixel_length_,row * tile_pixel_length_ + tile_pixel_length_);
       ci::Rectf picture_bounds(top_left_picture_bound, bottom_right_picture_bound);
       ci::gl::draw(ci::gl::Texture2d::create(board[row][column]->GetImage()), picture_bounds);
+      //Draws power/heal/gold amount
+      switch (board[row][column]->GetTileType()) {
+        case tile::kWeapon_Tile: {
+          WeaponTile *weapon_tile = static_cast<WeaponTile *>(board[row][column]);
+          int value = weapon_tile->GetValue();
+          string value_str = std::to_string(value);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound);
+          break;
+        }
+
+        case tile::kEnemy_Tile: {
+          EnemyTile *enemy_tile = static_cast<EnemyTile *>(board[row][column]);
+          int value = enemy_tile->GetValue();
+          string value_str = std::to_string(value);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound,ci::Color("white")), ci::Font("", 9999);
+          break;
+        }
+
+        case tile::kGold_Tile: {
+          GoldTile *gold_tile = static_cast<GoldTile *>(board[row][column]);
+          int value = gold_tile->GetValue();
+          string value_str = std::to_string(value);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound);
+          break;
+        }
+
+        case tile::kHealth_Tile: {
+          HealthTile *health_tile = static_cast<HealthTile *>(board[row][column]);
+          int value = health_tile->GetValue();
+          string value_str = std::to_string(value);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound);
+          break;
+        }
+      }
+      //Draws player
       if (game_board_.GetPlayerLocation() == vec2(column, row)) {
         ci::gl::draw(ci::gl::Texture2d::create(ci::loadImage("player/Player.png")), picture_bounds);
       }

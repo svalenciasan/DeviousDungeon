@@ -13,12 +13,13 @@ class Weapon {
   //Random power
   Weapon() = default;
   Weapon(WeaponType weapon_type);
-  Weapon(WeaponType weapon_type, size_t power);
-  size_t UseWeapon(size_t other_power);
-  size_t GetPower();
-  WeaponType GetType();
+  Weapon(WeaponType weapon_type, int power);
+
+  int SetPower(int other_power);
+  int GetPower() const;
+  WeaponType GetType() const;
  private:
-  size_t power_;
+  int power_ = 0;
   WeaponType weapon_type_;
 };
 }//namespace weapon

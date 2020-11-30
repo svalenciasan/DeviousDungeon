@@ -55,6 +55,8 @@ class GameBoard {
   vector<vector<Tile*>> GetBoard() const;
   vec2 GetPlayerLocation() const;
  private:
+  size_t kRows = 0;
+  size_t kColumns = 0;
   //Note:(0,0) is the top-left corner unless stated otherwise.
   ProceduralGeneration procedural_generation_;
   size_t current_level_;
@@ -68,6 +70,8 @@ class GameBoard {
    * @return
    */
   vec2 MakeEmptyTile(vec2 location);
+  void OnEnter(vec2 location);
+  void GenerateNextLevel();
 };
 }//namespace gameboard
 }//namespace deviousdungeon

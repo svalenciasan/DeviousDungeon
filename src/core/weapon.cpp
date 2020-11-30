@@ -8,19 +8,20 @@ Weapon::Weapon(WeaponType weapon_type) {
   weapon_type_ = weapon_type;
   power_ = rand() % 1 + 7;
 }
-Weapon::Weapon(WeaponType weapon_type, size_t power) {
+Weapon::Weapon(WeaponType weapon_type, int power) {
   weapon_type_ = weapon_type;
   power_ = power;
 }
-size_t Weapon::UseWeapon(size_t other_power) {
-  return power_ - other_power;
+
+int Weapon::SetPower(int other_power) {
+  return 5;
 }
 
-size_t Weapon::GetPower() {
+int Weapon::GetPower() const{
   return power_;
 }
 
-WeaponType Weapon::GetType() {
+WeaponType Weapon::GetType() const{
   return weapon_type_;
 }
 }//namespace weapon

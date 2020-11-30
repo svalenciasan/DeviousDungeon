@@ -8,11 +8,11 @@ class Enemy {
  public:
   //Random enemy power.
   Enemy();
-  Enemy(size_t power);
-  size_t GetPower();
-  size_t SetPower(size_t power);
+  Enemy(int power);
+  int GetPower() const;
+  int SetPower(int power);
  private:
-  size_t power_;
+  int power_;
 };
 }//namespace enemy
 }//namespace deviousdungeon

@@ -21,6 +21,18 @@ ProceduralGeneration::ProceduralGeneration() {
   enemy_power_probability_[5] = 2;
   enemy_power_probability_[6] = 1;
   enemy_power_probability_[7] = 0.5;
+  //Heal amount probability
+  heal_amount_probability_[1] = 10;
+  heal_amount_probability_[2] = 8;
+  heal_amount_probability_[3] = 7;
+  heal_amount_probability_[4] = 6;
+  heal_amount_probability_[5] = 5;
+  //Coin amount probability
+  coin_amount_probability_[1] = 10;
+  coin_amount_probability_[2] = 9;
+  coin_amount_probability_[3] = 8;
+  coin_amount_probability_[4] = 7;
+  coin_amount_probability_[5] = 6;
   //Weapon type probability
   weapon_type_probability_[weapon::kMeleeWeapon] = 10;
   weapon_type_probability_[weapon::kRangedWeapon] = 5;
@@ -38,8 +50,12 @@ ProceduralGeneration::ProceduralGeneration() {
 /**
  * Public functions
  */
-vector<vector<Tile*>> ProceduralGeneration::GenerateRandomBoard(size_t rows, size_t columns) {
-  vector<vector<Tile*>> board(rows, vector<Tile*>(columns));
+void ProceduralGeneration::UpdateProbabilities(size_t level) {
+  //TODO Implement this feature
+  return;
+}
+vector<vector<Tile *>> ProceduralGeneration::GenerateRandomBoard(size_t rows, size_t columns) {
+  vector<vector<Tile *>> board(rows, vector<Tile *>(columns));
   //Random seed for current generation
   size_t seed = static_cast<size_t>(time(0));
   seeds_.push_back(seed);
@@ -62,7 +78,8 @@ vector<vector<Tile*>> ProceduralGeneration::GenerateRandomBoard(size_t rows, siz
   for (size_t row = 0; row < board.size(); row++) {
     for (size_t column = 0; column < board[row].size(); column++) {
       if (board[row][column] != NULL &&
-          (board[row][column]->GetTileType() == tile::kSpawnTile || board[row][column]->GetTileType() == tile::kPortalTile)) {
+          (board[row][column]->GetTileType() == tile::kSpawnTile
+              || board[row][column]->GetTileType() == tile::kPortalTile)) {
         continue;
       }
       switch (tiles.at(dist(gen))) {
@@ -77,12 +94,12 @@ vector<vector<Tile*>> ProceduralGeneration::GenerateRandomBoard(size_t rows, siz
           break;
         }
         case tile::kGold_Tile: {
-          GoldTile *gold_tile = new GoldTile();
+          GoldTile *gold_tile = new GoldTile(GenerateRandomCoinAmount());
           board[row][column] = gold_tile;
           break;
         }
         case tile::kHealth_Tile: {
-          HealthTile *health_tile = new HealthTile();
+          HealthTile *health_tile = new HealthTile(GenerateRandomHealAmount());
           board[row][column] = health_tile;
           break;
         }
@@ -91,6 +108,7 @@ vector<vector<Tile*>> ProceduralGeneration::GenerateRandomBoard(size_t rows, siz
   }
   return board;
 }
+
 Enemy ProceduralGeneration::GenerateRandomEnemy() {
   //Splitting map into tiles and weight vectors
   vector<size_t> power;
@@ -120,22 +138,52 @@ void ProceduralGeneration::AddSeed(size_t seed) {
 vector<size_t> ProceduralGeneration::GetSeeds() const {
   return seeds_;
 }
+
+size_t ProceduralGeneration::GenerateRandomHealAmount() {
+  vector<size_t> value;
+  vector<double> weights;
+  for (auto it = heal_amount_probability_.begin(); it != heal_amount_probability_.end(); ++it) {
+    value.push_back(it->first);
+    weights.push_back(it->second);
+  }
+  //Creating the discrete distribution. Weighted probability.
+  std::discrete_distribution<int> dist(begin(weights), end(weights));
+  std::mt19937 gen;
+  gen.seed(rand());
+
+  return value.at(dist(gen));
+}
+
+size_t ProceduralGeneration::GenerateRandomCoinAmount() {
+  vector<size_t> value;
+  vector<double> weights;
+  for (auto it = coin_amount_probability_.begin(); it != coin_amount_probability_.end(); ++it) {
+    value.push_back(it->first);
+    weights.push_back(it->second);
+  }
+  //Creating the discrete distribution. Weighted probability.
+  std::discrete_distribution<int> dist(begin(weights), end(weights));
+  std::mt19937 gen;
+  gen.seed(rand());
+
+  return value.at(dist(gen));
+}
 //Private
 /**
  * Procedural Generation
  */
-size_t ProceduralGeneration::GenerateRandomPortal(vector<vector<Tile*>>& board) {
+size_t ProceduralGeneration::GenerateRandomPortal(vector<vector<Tile *>> &board) {
   //Randomizing the exit portal at top row
   size_t portal_location = rand() % board[0].size();
-  PortalTile* portal_tile = new PortalTile();
+  PortalTile *portal_tile = new PortalTile();
   board[0][portal_location] = portal_tile;
   return portal_location;
 }
 
-size_t ProceduralGeneration::GenerateRandomSpawn(vector<vector<Tile*>>& board) {
+size_t ProceduralGeneration::GenerateRandomSpawn(vector<vector<Tile *>> &board) {
   //Randomizing the spawn point at last row
   size_t spawn_location = rand() % board[board.size() - 1].size();
-  SpawnTile* spawn_tile = new SpawnTile();
+  SpawnTile *spawn_tile = new SpawnTile();
   board[board.size() - 1][spawn_location] = spawn_tile;
   return spawn_location;
 }

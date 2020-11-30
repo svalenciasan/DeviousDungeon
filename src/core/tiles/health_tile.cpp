@@ -12,7 +12,11 @@ HealthTile::HealthTile(size_t heal) {
   heal_ = heal;
 }
 
-size_t HealthTile::GetHeal() {
+void HealthTile::OnEnter(Player &player) {
+  player.Heal(heal_);
+}
+
+int HealthTile::GetValue() const {
   return heal_;
 }
 
