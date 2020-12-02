@@ -115,7 +115,6 @@ void DeviousDungeonApp::DrawBottomUI(vec2 top_left, vec2 bottom_right) {
     empty_health--;
   }
   //WEAPON UI
-
 }
 
 }//namespace visualizer
