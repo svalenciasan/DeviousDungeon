@@ -4,7 +4,10 @@
 using deviousdungeon::gameboard::GameBoard;
 
 TEST_CASE("Board Generation", "[procedural][board]") {
-SECTION("Update <0,0> velocity") {
-  GameBoard game_board(2, 2);
+SECTION("Constructor") {
+  GameBoard game_board(5, 5);
+  size_t a = 5;
+  size_t b = 9;
+  auto g = a - b;
 }
 }

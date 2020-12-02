@@ -12,6 +12,14 @@ GoldTile::GoldTile(size_t gold) {
   gold_ = gold;
 }
 
+void GoldTile::OnEnter(Player &player) {
+  player.AddCoins(gold_);
+}
+
+int GoldTile::GetValue() const {
+  return gold_;
+}
+
 TileType GoldTile::GetTileType() {
   return tile_type_;
 }

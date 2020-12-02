@@ -12,7 +12,11 @@ WeaponTile::WeaponTile(Weapon weapon) {
   weapon_ = weapon;
 }
 
-size_t WeaponTile::GetWeaponPower() {
+void WeaponTile::OnEnter(Player& player) {
+  player.EquipWeapon(weapon_);
+}
+
+int WeaponTile::GetValue() const {
   return weapon_.GetPower();
 }
 
