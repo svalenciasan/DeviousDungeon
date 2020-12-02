@@ -18,38 +18,38 @@ int Player::Heal(int heal) {
 }
 
 int Player::UseMelee(Enemy& enemy) {
-  int power_difference = enemy.GetPower() - melee_weapon.GetPower();
+  int power_difference = enemy.GetPower() - melee_weapon_.GetPower();
   if (power_difference >= 0) {
     current_health_ -= power_difference;
     enemy.SetPower(0);
-    melee_weapon.SetPower(0);
+    melee_weapon_.SetPower(0);
     return 0;
   } else {
-    melee_weapon.SetPower(abs(power_difference));
+    melee_weapon_.SetPower(abs(power_difference));
     enemy.SetPower(0);
-    return melee_weapon.GetPower();
+    return melee_weapon_.GetPower();
   }
 }
 
 int Player::UseRanged(Enemy& enemy) {
-  int power_difference = enemy.GetPower() - ranged_weapon.GetPower();
+  int power_difference = enemy.GetPower() - ranged_weapon_.GetPower();
   if (power_difference >= 0) {
     enemy.SetPower(power_difference);
-    return ranged_weapon.GetPower();
+    return ranged_weapon_.GetPower();
   } else {
-    ranged_weapon.SetPower(abs(power_difference));
+    ranged_weapon_.SetPower(abs(power_difference));
     enemy.SetPower(0);
-    return ranged_weapon.GetPower();
+    return ranged_weapon_.GetPower();
   }
 }
 
 void Player::EquipWeapon(Weapon& weapon) {
   switch (weapon.GetType()) {
     case weapon::kMeleeWeapon:
-      melee_weapon = weapon;
+      melee_weapon_ = weapon;
       break;
     case weapon::kRangedWeapon:
-      ranged_weapon = weapon;
+      ranged_weapon_ = weapon;
       break;
   }
 }
@@ -68,6 +68,15 @@ void Player::EquipWeapon(Weapon& weapon) {
 
  int Player::GetMaxHealth() const {
    return max_health_;
+ }
+
+ Weapon Player::GetWeapon(weapon::WeaponType weapon_type) {
+   switch (weapon_type) {
+     case weapon::kMeleeWeapon:
+       return melee_weapon_;
+     default:
+       return ranged_weapon_;
+   }
  }
 }//namespace player
 }//namespace deviousdungeon
