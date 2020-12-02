@@ -78,5 +78,9 @@ void Player::EquipWeapon(Weapon& weapon) {
        return ranged_weapon_;
    }
  }
+
+ int Player::GetCoins() const{
+   return coins_;
+ }
 }//namespace player
 }//namespace deviousdungeon

@@ -84,6 +84,10 @@ size_t GameBoard::GetLevel() const {
    return current_level_;
 }
 
+size_t GameBoard::GetScore() const {
+   return player_.GetCoins();
+}
+
 vec2 GameBoard::GetPlayerLocation() const {
   return player_location_;
 }

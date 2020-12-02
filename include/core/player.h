@@ -26,6 +26,7 @@ class Player {
   int UseRanged(Enemy& enemy);
   void EquipWeapon(Weapon& weapon);
   int AddCoins(int coins);
+  int GetCoins() const;
   int Heal(int heal);
   int GetHealth()const;
   int GetMaxHealth()const;

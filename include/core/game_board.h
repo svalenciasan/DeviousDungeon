@@ -62,6 +62,7 @@ class GameBoard {
   size_t GetRows() const;
   size_t GetColumns() const;
   size_t GetLevel() const;
+  size_t GetScore() const;
   vec2 GetPlayerLocation() const;
   Player GetPlayer() const;
 
