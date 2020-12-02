@@ -27,6 +27,9 @@ class Player {
   void EquipWeapon(Weapon& weapon);
   int AddCoins(int coins);
   int Heal(int heal);
+  int GetHealth()const;
+  int GetMaxHealth()const;
+  int SetHealth(int health);
  private:
   int max_health_ = 3;
   int current_health_ = 3;

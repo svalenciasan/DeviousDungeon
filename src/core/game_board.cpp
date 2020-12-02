@@ -68,9 +68,29 @@ vec2 GameBoard::Move(Direction direction) {
    return board_;
  }
 
- vec2 GameBoard::GetPlayerLocation() const {
-   return player_location_;
+ GameState GameBoard::GetGameState() const {
+   return state_;
  }
+
+ size_t GameBoard::GetColumns() const {
+   return kColumns;
+ }
+
+size_t GameBoard::GetRows() const {
+   return kRows;
+}
+
+size_t GameBoard::GetLevel() const {
+   return current_level_;
+}
+
+vec2 GameBoard::GetPlayerLocation() const {
+  return player_location_;
+}
+
+Player GameBoard::GetPlayer() const {
+  return player_;
+}
 
 /**
  * Private/Helper
@@ -98,11 +118,13 @@ vec2 GameBoard::Move(Direction direction) {
  }
 
  void GameBoard::OnEnter(vec2 location) {
-  Tile* tile = board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)];
   switch (board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]->GetTileType()) {
     case tile::kEnemy_Tile: {
       EnemyTile* enemy_tile = static_cast<EnemyTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       enemy_tile->OnEnter(player_);
+      if (player_.GetHealth() <= 0) {
+        state_ = kGameOver;
+      }
       break;
     }
     case tile::kWeapon_Tile: {
@@ -121,12 +143,13 @@ vec2 GameBoard::Move(Direction direction) {
       break;
     }
     case tile::kPortalTile: {
+      current_level_++;
       GenerateNextLevel();
       //Used to avoid making an empty tile at the portal location
       return;
     }
     case tile::kEmpty_Tile: {
-      //TODO END OF GAME?
+      state_ = kGameOver;
       break;
     }
   }

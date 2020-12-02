@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 #include "vector"
 #include "map"
+#include <cmath>
 #include "memory"
 #include "core/tiles/tile.h"
 #include "core/tiles/enemy_tile.h"
@@ -17,6 +18,7 @@
 using std::vector;
 using std::unique_ptr;
 using std::map;
+using std::pow;
 using deviousdungeon::tile::Tile;
 using deviousdungeon::tile::PortalTile;
 using deviousdungeon::tile::SpawnTile;

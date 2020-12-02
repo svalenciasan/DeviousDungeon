@@ -13,45 +13,46 @@ ProceduralGeneration::ProceduralGeneration() {
   probability_of_tile_[tile::kWeapon_Tile] = 7;
   probability_of_tile_[tile::kGold_Tile] = 4;
   probability_of_tile_[tile::kHealth_Tile] = 3;
-  //Enemy power probability
-  enemy_power_probability_[1] = 10;
-  enemy_power_probability_[2] = 8;
-  enemy_power_probability_[3] = 6;
-  enemy_power_probability_[4] = 4;
-  enemy_power_probability_[5] = 2;
-  enemy_power_probability_[6] = 1;
-  enemy_power_probability_[7] = 0.5;
-  //Heal amount probability
-  heal_amount_probability_[1] = 10;
-  heal_amount_probability_[2] = 8;
-  heal_amount_probability_[3] = 7;
-  heal_amount_probability_[4] = 6;
-  heal_amount_probability_[5] = 5;
-  //Coin amount probability
-  coin_amount_probability_[1] = 10;
-  coin_amount_probability_[2] = 9;
-  coin_amount_probability_[3] = 8;
-  coin_amount_probability_[4] = 7;
-  coin_amount_probability_[5] = 6;
   //Weapon type probability
   weapon_type_probability_[weapon::kMeleeWeapon] = 10;
   weapon_type_probability_[weapon::kRangedWeapon] = 5;
-  //Melee weapon power probability
-  melee_weapon_power_probability_[1] = 10;
-  melee_weapon_power_probability_[2] = 7;
-  melee_weapon_power_probability_[3] = 5;
-  melee_weapon_power_probability_[4] = 3;
-  //Ranged weapon power probability
-  ranged_weapon_power_probability_[3] = 10;
-  ranged_weapon_power_probability_[4] = 7;
-  ranged_weapon_power_probability_[5] = 5;
-  ranged_weapon_power_probability_[6] = 3;
+  UpdateProbabilities(1);
 }
 /**
  * Public functions
  */
 void ProceduralGeneration::UpdateProbabilities(size_t level) {
   //TODO Implement this feature
+  //Enemy power probability
+  enemy_power_probability_[1] = 1 + .5 * level;
+  enemy_power_probability_[2] = .5 * std::max(static_cast<int>(level) - 1, 0);
+  enemy_power_probability_[3] = .6 * std::max(static_cast<int>(level) - 5, 0);
+  enemy_power_probability_[4] = .7 * std::max(static_cast<int>(level) - 9, 0);
+  enemy_power_probability_[5] = .8 * std::max(static_cast<int>(level) - 13, 0);
+  enemy_power_probability_[6] = .9 * std::max(static_cast<int>(level) - 17, 0);
+  enemy_power_probability_[7] = 1 * std::max(static_cast<int>(level) - 18, 0);
+  //Heal amount probability
+  heal_amount_probability_[1] = 1 + .5 * level;
+  heal_amount_probability_[2] = .5 * std::max(static_cast<int>(level) - 1, 0);
+  heal_amount_probability_[3] = .6 * std::max(static_cast<int>(level) - 5, 0);
+  heal_amount_probability_[4] = .7 * std::max(static_cast<int>(level) - 9, 0);
+  heal_amount_probability_[5] = .8 * std::max(static_cast<int>(level) - 13, 0);
+  //Coin amount probability
+  coin_amount_probability_[1] = 1 + .5 * level;
+  coin_amount_probability_[2] = .5 * std::max(static_cast<int>(level) - 1, 0);
+  coin_amount_probability_[3] = .6 * std::max(static_cast<int>(level) - 5, 0);
+  coin_amount_probability_[4] = .7 * std::max(static_cast<int>(level) - 9, 0);
+  coin_amount_probability_[5] = .8 * std::max(static_cast<int>(level) - 13, 0);
+  //Melee weapon power probability
+  melee_weapon_power_probability_[1] = 1 + .5 * level;
+  melee_weapon_power_probability_[2] = .5 * std::max(static_cast<int>(level) - 1, 0);
+  melee_weapon_power_probability_[3] = .6 * std::max(static_cast<int>(level) - 5, 0);
+  melee_weapon_power_probability_[4] = .7 * std::max(static_cast<int>(level) - 9, 0);
+  //Ranged weapon power probability
+  ranged_weapon_power_probability_[3] = 1 + .5 * level;
+  ranged_weapon_power_probability_[4] = .5 * std::max(static_cast<int>(level) - 3, 0);
+  ranged_weapon_power_probability_[5] = .6 * std::max(static_cast<int>(level) - 5, 0);
+  ranged_weapon_power_probability_[6] = .7 * std::max(static_cast<int>(level) - 9, 0);
   return;
 }
 vector<vector<Tile *>> ProceduralGeneration::GenerateRandomBoard(size_t rows, size_t columns) {

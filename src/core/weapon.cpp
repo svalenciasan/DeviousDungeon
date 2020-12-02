@@ -14,7 +14,8 @@ Weapon::Weapon(WeaponType weapon_type, int power) {
 }
 
 int Weapon::SetPower(int other_power) {
-  return 5;
+  power_ = other_power;
+  return power_;
 }
 
 int Weapon::GetPower() const{

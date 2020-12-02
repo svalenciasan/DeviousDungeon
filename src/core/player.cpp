@@ -53,5 +53,21 @@ void Player::EquipWeapon(Weapon& weapon) {
       break;
   }
 }
+
+/**
+ * Getters/Setters
+ */
+ int Player::GetHealth() const {
+   return current_health_;
+ }
+
+ int Player::SetHealth(int health) {
+   current_health_ = health;
+   return current_health_;
+ }
+
+ int Player::GetMaxHealth() const {
+   return max_health_;
+ }
 }//namespace player
 }//namespace deviousdungeon
