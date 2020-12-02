@@ -3,6 +3,7 @@
 #include "cinder/gl/gl.h"
 #include "vector"
 #include "map"
+#include <cmath>
 #include "memory"
 #include "core/tiles/tile.h"
 #include "core/tiles/enemy_tile.h"
@@ -17,6 +18,7 @@
 using std::vector;
 using std::unique_ptr;
 using std::map;
+using std::pow;
 using deviousdungeon::tile::Tile;
 using deviousdungeon::tile::PortalTile;
 using deviousdungeon::tile::SpawnTile;
@@ -32,8 +34,13 @@ namespace proceduralgeneration {
 class ProceduralGeneration {
  public:
   ProceduralGeneration();
-  //ProceduralGeneration(size_t rows, size_t columns);
-
+  void UpdateProbabilities(size_t level);
+/**
+ * Creates a board with procedurally generated tiles.
+ * @param rows
+ * @param columns
+ * @return
+ */
   vector<vector<Tile*>> GenerateRandomBoard(size_t rows, size_t columns);
   /**
  * Adds random portal location to board.
@@ -45,8 +52,18 @@ class ProceduralGeneration {
    * @return Spawn column location.
    */
   size_t GenerateRandomSpawn(vector<vector<Tile*>>& board);
+  /**
+   * Creates a random enemy with a random power value.
+   * @return
+   */
   Enemy GenerateRandomEnemy();
+  /**
+   * Creates a random weapon with a random power value.
+   * @return
+   */
   Weapon GenerateRandomWeapon();
+  size_t GenerateRandomHealAmount();
+  size_t GenerateRandomCoinAmount();
   /**
    * Getters/Setters.
    */
@@ -57,6 +74,10 @@ class ProceduralGeneration {
   map<tile::TileType, double> probability_of_tile_;
   //Damage of enemy to probability
   map<size_t, double> enemy_power_probability_;
+  //Health probability
+  map<size_t, double> heal_amount_probability_;
+  //Coins probability
+  map<size_t, double> coin_amount_probability_;
   //Probability of each weapon type appearing.
   map<weapon::WeaponType, double> weapon_type_probability_;
   map<size_t, double> melee_weapon_power_probability_;
@@ -66,7 +87,16 @@ class ProceduralGeneration {
    */
   vector<size_t> seeds_;
   //Private helper
+  /**
+   * Returns a random power level according to the weapon type.
+   * @param type
+   * @return
+   */
   size_t GenerateRandomWeaponPower(weapon::WeaponType type);
+  /**
+   * Returns a random weapon type.
+   * @return
+   */
   weapon::WeaponType GenerateRandomWeaponType();
 };
 }//namespace procedural_generation

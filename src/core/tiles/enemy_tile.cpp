@@ -6,14 +6,15 @@ using deviousdungeon::enemy::Enemy;
 
 namespace deviousdungeon {
 namespace tile {
-//EnemyTile::EnemyTile() {
-//  enemy_ = Enemy();
-//}
 EnemyTile::EnemyTile(Enemy enemy) {
   enemy_ = enemy;
 }
 
-size_t EnemyTile::GetEnemyPower() {
+void EnemyTile::OnEnter(Player& player) {
+  player.UseMelee(enemy_);
+}
+
+int EnemyTile::GetValue() const{
   return enemy_.GetPower();
 }
 

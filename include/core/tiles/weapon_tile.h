@@ -13,7 +13,8 @@ class WeaponTile : public Tile {
   WeaponTile(Weapon weapon);
 
   void OnEnter(Player& player);
-  size_t GetWeaponPower();
+
+  int GetValue() const;
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
  private:
