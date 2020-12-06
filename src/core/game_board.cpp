@@ -71,6 +71,10 @@ void GameBoard::RangedAttack(vec2 position) {
   } else if (position == (player_location_ + vec2(1,1)) || position == (player_location_ + vec2(-1,-1)) ||
       position == (player_location_ + vec2(-1,1)) || position == (player_location_ + vec2(1,-1))){
    player_.UseRanged(static_cast<EnemyTile*>(board_[row][column])->GetEnemy());
+   if (bow_sound_->isPlaying()) {
+     bow_sound_->stop();
+   }
+    bow_sound_->start();
   }
 }
 
@@ -144,29 +148,53 @@ Player GameBoard::GetPlayer() const {
  void GameBoard::OnEnter(vec2 location) {
   switch (board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]->GetTileType()) {
     case tile::kEnemy_Tile: {
+      if (sword_sound_->isPlaying()) {
+        sword_sound_->stop();
+      }
+      sword_sound_->start();
       EnemyTile* enemy_tile = static_cast<EnemyTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       enemy_tile->OnEnter(player_);
       if (player_.GetHealth() <= 0) {
         state_ = kGameOver;
+        if (death_sound_->isPlaying()) {
+          death_sound_->stop();
+        }
+        death_sound_->start();
       }
       break;
     }
     case tile::kWeapon_Tile: {
+      if (pickup_sound_->isPlaying()) {
+        pickup_sound_->stop();
+      }
+      pickup_sound_->start();
       WeaponTile* weapon_tile = static_cast<WeaponTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       weapon_tile->OnEnter(player_);
       break;
     }
     case tile::kHealth_Tile: {
+      if (heal_sound_->isPlaying()) {
+        heal_sound_->stop();
+      }
+      heal_sound_->start();
       HealthTile* health_tile = static_cast<HealthTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       health_tile->OnEnter(player_);
       break;
     }
     case tile::kGold_Tile: {
+      if (coin_sound_->isPlaying()) {
+        coin_sound_->stop();
+      }
+      coin_sound_->start();
       GoldTile* gold_tile = static_cast<GoldTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       gold_tile->OnEnter(player_);
       break;
     }
     case tile::kPortalTile: {
+      if (portal_sound_->isPlaying()) {
+        portal_sound_->stop();
+      }
+      portal_sound_->start();
       current_level_++;
       GenerateNextLevel();
       //Used to avoid making an empty tile at the portal location
@@ -174,15 +202,31 @@ Player GameBoard::GetPlayer() const {
     }
     case tile::kEmpty_Tile: {
       state_ = kGameOver;
+      if (death_sound_->isPlaying()) {
+        death_sound_->stop();
+      }
+      death_sound_->start();
       break;
     }
     case tile::kBoss_Tile: {
+      if (sword_sound_->isPlaying()) {
+        sword_sound_->stop();
+      }
+      sword_sound_->start();
       EnemyTile* enemy_tile = static_cast<EnemyTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
       enemy_tile->OnEnter(player_);
       if (player_.GetHealth() <= 0) {
         state_ = kGameOver;
+        if (death_sound_->isPlaying()) {
+          death_sound_->stop();
+        }
+        death_sound_->start();
       } else {
         state_ = kWinGame;
+        if (win_sound_->isPlaying()) {
+          win_sound_->stop();
+        }
+        win_sound_->start();
       }
     }
   }

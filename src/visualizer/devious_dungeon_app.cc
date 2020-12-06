@@ -48,6 +48,9 @@ void DeviousDungeonApp::keyDown(ci::app::KeyEvent event) {
     case ci::app::KeyEvent::KEY_d:
       tile_board_.HandleMovement(gameboard::kRight);
       break;
+    case ci::app::KeyEvent::KEY_r:
+      game_board_ = GameBoard(kBoardSize, kBoardSize);
+      break;
   }
 }
 

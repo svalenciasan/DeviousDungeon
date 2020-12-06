@@ -77,6 +77,17 @@ class GameBoard {
   //X component corresponds to the column while y component corresponds to the row.
   vec2 player_location_;
   vector<vector<Tile*>> board_;
+
+  ci::audio::VoiceRef bow_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("bowsound.mp3")));
+  ci::audio::VoiceRef sword_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("swordsound.mp3")));
+  ci::audio::VoiceRef pickup_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("pickupsound.mp3")));
+  ci::audio::VoiceRef heal_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("potionsound.mp3")));
+  ci::audio::VoiceRef coin_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("coinsound.mp3")));
+  ci::audio::VoiceRef portal_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("portalsound.mp3")));
+  ci::audio::VoiceRef death_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("deathsound.mp3")));
+  ci::audio::VoiceRef win_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("winsound.mp3")));
+
+
   /**
    * Turns a tile into an kEmptyTile.
    * @param location

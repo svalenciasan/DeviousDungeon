@@ -3,9 +3,13 @@
 #include "cinder/gl/gl.h"
 #include "cinder/Font.h"
 #include "cinder/gl/TextureFont.h"
+#include "cinder/audio/audio.h"
+#include "cinder/app/RendererGl.h"
+#include "cinder/app/App.h"
 #include "core/game_board.h"
 #include <iostream>
 #include <string>
+
 
 using std::string;
 using deviousdungeon::gameboard::GameBoard;

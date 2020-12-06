@@ -3,6 +3,9 @@
 #include "cinder/gl/gl.h"
 #include "weapon.h"
 #include "enemy.h"
+#include "cinder/audio/audio.h"
+#include "cinder/app/RendererGl.h"
+#include "cinder/app/App.h"
 
 using deviousdungeon::weapon::Weapon;
 using deviousdungeon::enemy::Enemy;
@@ -33,12 +36,11 @@ class Player {
   int SetHealth(int health);
   Weapon GetWeapon(weapon::WeaponType weapon_type);
  private:
-  int max_health_ = 100;
-  int current_health_ = 100;
+  int max_health_ = 3;
+  int current_health_ = 3;
   int coins_ = 0;
   Weapon melee_weapon_;
   Weapon ranged_weapon_;
 };
-//TODO: ADD SOUND
 }//namespace player
 }//namespace deviousdungeon
