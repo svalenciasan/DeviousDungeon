@@ -176,6 +176,15 @@ Player GameBoard::GetPlayer() const {
       state_ = kGameOver;
       break;
     }
+    case tile::kBoss_Tile: {
+      EnemyTile* enemy_tile = static_cast<EnemyTile*>(board_[static_cast<size_t>(location.y)][static_cast<size_t>(location.x)]);
+      enemy_tile->OnEnter(player_);
+      if (player_.GetHealth() <= 0) {
+        state_ = kGameOver;
+      } else {
+        state_ = kWinGame;
+      }
+    }
   }
   MakeEmptyTile(location);
  }

@@ -62,11 +62,13 @@ void DeviousDungeonApp::mouseDown(ci::app::MouseEvent event) {
 void DeviousDungeonApp::DrawGameOver() {
   auto font = ci::Font("", 100);
   ci::gl::drawStringCentered("Game Over", vec2(kWindowSize / 2, kUpperMargin), ci::Color("black"), font);
+  ci::gl::drawStringCentered("Score: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("black"), font);
 }
 
 void DeviousDungeonApp::DrawWinningGame() {
   auto font = ci::Font("", 100);
   ci::gl::drawStringCentered("Win", vec2(kWindowSize / 2, kUpperMargin), ci::Color("black"), font);
+  ci::gl::drawStringCentered("Score: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("black"), font);
 }
 
 void DeviousDungeonApp::DrawUI() {
@@ -75,7 +77,6 @@ void DeviousDungeonApp::DrawUI() {
 
   ci::gl::color(ci::Color("beige"));
   ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
-  //ci::gl::drawStrokedRect(ci::Rectf(top_left, bottom_right));
 
   auto font = ci::Font("", 30);
   ci::gl::drawStringRight("SCORE: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize - kSideMargin, 50), ci::Color("black"), font);
