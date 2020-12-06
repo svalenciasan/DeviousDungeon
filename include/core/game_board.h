@@ -53,7 +53,7 @@ class GameBoard {
    * @return
    */
   vec2 Move(Direction direction);
-
+  void RangedAttack(vec2 position);
   /**
    * Getters/Setters.
    */
@@ -82,6 +82,7 @@ class GameBoard {
    * @param location
    * @return
    */
+
   vec2 MakeEmptyTile(vec2 location);
   void OnEnter(vec2 location);
   void GenerateNextLevel();

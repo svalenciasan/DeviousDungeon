@@ -51,6 +51,10 @@ void DeviousDungeonApp::keyDown(ci::app::KeyEvent event) {
   }
 }
 
+void DeviousDungeonApp::mouseDown(ci::app::MouseEvent event) {
+  tile_board_.HandleRanged(event.getPos());
+}
+
 /**
  * Private
  */

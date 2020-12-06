@@ -16,5 +16,4 @@ TEST_CASE("Board Generation", "[procedural][board]") {
 }
 TEST_CASE("Movement", "move") {
   GameBoard game_board(5, 5);
-
 }

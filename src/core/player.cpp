@@ -35,6 +35,7 @@ int Player::UseRanged(Enemy& enemy) {
   int power_difference = enemy.GetPower() - ranged_weapon_.GetPower();
   if (power_difference >= 0) {
     enemy.SetPower(power_difference);
+    ranged_weapon_.SetPower(0);
     return ranged_weapon_.GetPower();
   } else {
     ranged_weapon_.SetPower(abs(power_difference));

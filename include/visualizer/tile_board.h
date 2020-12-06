@@ -29,6 +29,7 @@ class TileBoard {
   void Draw() const;
 
   void HandleMovement(gameboard::Direction direction);
+  void HandleRanged(vec2 position);
 
   void UpdateBounds(vec2 top_left_corner, vec2 bottom_right_corner);
  private:

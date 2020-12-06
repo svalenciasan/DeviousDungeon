@@ -17,6 +17,7 @@ class DeviousDungeonApp : public ci::app::App {
   void update() override;
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
+  void mouseDown(ci::app::MouseEvent event) override;
  private:
   const double kWindowSize = 900;
   const double kSideMargin = kWindowSize * .15;

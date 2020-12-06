@@ -33,11 +33,12 @@ class Player {
   int SetHealth(int health);
   Weapon GetWeapon(weapon::WeaponType weapon_type);
  private:
-  int max_health_ = 3;
-  int current_health_ = 3;
+  int max_health_ = 100;
+  int current_health_ = 100;
   int coins_ = 0;
   Weapon melee_weapon_;
   Weapon ranged_weapon_;
 };
+//TODO: ADD SOUND
 }//namespace player
 }//namespace deviousdungeon

@@ -83,6 +83,14 @@ void TileBoard::Draw() const {
 void TileBoard::HandleMovement(gameboard::Direction direction) {
   game_board_->Move(direction);
 }
+
+void TileBoard::HandleRanged(vec2 position) {
+  vec2 board_coords =
+      ((position - top_left_corner_) / (float)tile_pixel_length_);
+      (position - top_left_corner_) / (float)tile_pixel_length_;
+  board_coords = vec2(floor(board_coords.x), floor(board_coords.y));
+  game_board_->RangedAttack(board_coords);
+}
 }//namespace visualizer
 
 }//namespace deviousdungeon

@@ -9,8 +9,10 @@ class Enemy {
   //Random enemy power.
   Enemy();
   Enemy(int power);
+
   int GetPower() const;
   int SetPower(int power);
+
  private:
   int power_;
 };

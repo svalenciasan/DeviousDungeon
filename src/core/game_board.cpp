@@ -61,6 +61,19 @@ vec2 GameBoard::Move(Direction direction) {
   return player_location_;
 }
 
+void GameBoard::RangedAttack(vec2 position) {
+  size_t row = static_cast<size_t>(position.y);
+  size_t column = static_cast<size_t>(position.x);
+  if (player_.GetWeapon(weapon::kRangedWeapon).GetPower() <= 0 ||
+  row >= kRows || row < 0 || column >= kColumns || column < 0 ||
+  board_[row][column]->GetTileType() != tile::kEnemy_Tile || static_cast<EnemyTile*>(board_[row][column])->GetValue() <= 0) {
+    return;
+  } else if (position == (player_location_ + vec2(1,1)) || position == (player_location_ + vec2(-1,-1)) ||
+      position == (player_location_ + vec2(-1,1)) || position == (player_location_ + vec2(1,-1))){
+   player_.UseRanged(static_cast<EnemyTile*>(board_[row][column])->GetEnemy());
+  }
+}
+
 /**
  * Getters/Setters
  */
@@ -112,11 +125,18 @@ Player GameBoard::GetPlayer() const {
    procedural_generation_.UpdateProbabilities(current_level_);
    //Generate board
    board_ = procedural_generation_.GenerateRandomBoard(kRows, kColumns);
-   //Set player spawn point
+   //Set player spawn point and set boss if lvl 20
    for (size_t column = 0; column < kColumns; column++) {
+     if (current_level_ == 20 && board_[0][column]->GetTileType() == tile::kPortalTile) {
+       delete board_[0][column];
+       EnemyTile* enemy_tile = new EnemyTile(10);
+       board_[0][column] = enemy_tile;
+     }
      if (board_[board_.size() - 1][column]->GetTileType() == tile::kSpawnTile) {
        player_location_ = vec2(column, board_.size() - 1);
-       break;
+       if (current_level_ != 20) {
+         break;
+       }
      }
    }
  }
