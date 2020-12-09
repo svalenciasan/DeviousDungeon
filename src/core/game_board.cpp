@@ -17,6 +17,19 @@ GameBoard::GameBoard(const size_t rows, const size_t columns) : kRows(rows), kCo
   }
 }
 
+GameBoard::GameBoard(vector<vector<Tile*>>& board) {
+  board_ = board;
+  kRows = board_.size();
+  kColumns = board_[0].size();
+
+  for (size_t column = 0; column < kColumns; column++) {
+    if (board_[board_.size() - 1][column]->GetTileType() == tile::kSpawnTile) {
+      player_location_ = vec2(column, board_.size() - 1);
+      break;
+    }
+  }
+}
+
 vec2 GameBoard::Move(Direction direction) {
   if (state_ == kWinGame || state_ == kGameOver) {
     return player_location_;
@@ -213,6 +226,7 @@ Player GameBoard::GetPlayer() const {
         death_sound_->stop();
       }
       death_sound_->start();
+      player_.SetHealth(0);
       break;
     }
     case tile::kBoss_Tile: {

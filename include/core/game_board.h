@@ -47,6 +47,7 @@ class GameBoard {
   GameBoard() = default;
   //Creates a board with those dimensions.
   GameBoard(const size_t rows, const size_t columns);
+  GameBoard(vector<vector<Tile*>>& board);
   /**
    * Changes player location.
    * @param direction
