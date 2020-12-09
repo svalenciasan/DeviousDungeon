@@ -12,6 +12,7 @@ DeviousDungeonApp::DeviousDungeonApp() {
 }
 
 void DeviousDungeonApp::update() {
+  desert_sound_->start();
   tile_board_.UpdateBounds(vec2(kSideMargin, kUpperMargin),
                            vec2(kWindowSize - kSideMargin, kWindowSize - kLowerMargin));
 }

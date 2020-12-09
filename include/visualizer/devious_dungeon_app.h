@@ -31,6 +31,7 @@ class DeviousDungeonApp : public ci::app::App {
   GameBoard game_board_;
   TileBoard tile_board_;
 
+  ci::audio::VoiceRef desert_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("desertsong.mp3")));
   //Private methods
   void DrawGameOver();
   void DrawWinningGame();
