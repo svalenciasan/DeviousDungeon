@@ -14,7 +14,11 @@ Weapon::Weapon(WeaponType weapon_type, int power) {
 }
 
 int Weapon::SetPower(int other_power) {
-  power_ = other_power;
+  if (other_power < 0) {
+    power_ = 0;
+  } else {
+    power_ = other_power;
+  }
   return power_;
 }
 

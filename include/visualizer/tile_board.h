@@ -13,7 +13,6 @@
 
 using std::string;
 using deviousdungeon::gameboard::GameBoard;
-//using ci::gl::Texture;
 
 namespace deviousdungeon {
 

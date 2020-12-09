@@ -42,6 +42,16 @@ void TileBoard::Draw() const {
           break;
         }
 
+        case tile::kBoss_Tile: {
+          EnemyTile *enemy_tile = static_cast<EnemyTile *>(board[row][column]);
+          int value = enemy_tile->GetValue();
+          string value_str = std::to_string(value);
+
+          //texture_font_->drawString(value_str, bottom_right_picture_bound);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound + vec2(0, -20), ci::Color("black"), font_);
+          break;
+        }
+
         case tile::kEnemy_Tile: {
           EnemyTile *enemy_tile = static_cast<EnemyTile *>(board[row][column]);
           int value = enemy_tile->GetValue();

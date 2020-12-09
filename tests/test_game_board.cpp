@@ -3,7 +3,7 @@
 
 using deviousdungeon::gameboard::GameBoard;
 
-TEST_CASE("Board Generation", "[procedural][board]") {
+TEST_CASE("Constructor", "[constructor]") {
   SECTION("Constructor") {
     GameBoard game_board(5, 5);
     assert(game_board.GetGameState() == deviousdungeon::gameboard::kInProgress);

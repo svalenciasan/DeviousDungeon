@@ -21,6 +21,9 @@ int Player::UseMelee(Enemy& enemy) {
   int power_difference = enemy.GetPower() - melee_weapon_.GetPower();
   if (power_difference >= 0) {
     current_health_ -= power_difference;
+    if (current_health_ < 0) {
+      current_health_ = 0;
+    }
     enemy.SetPower(0);
     melee_weapon_.SetPower(0);
     return 0;

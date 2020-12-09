@@ -18,6 +18,9 @@ GameBoard::GameBoard(const size_t rows, const size_t columns) : kRows(rows), kCo
 }
 
 vec2 GameBoard::Move(Direction direction) {
+  if (state_ == kWinGame || state_ == kGameOver) {
+    return player_location_;
+  }
   size_t lower_bound = board_.size() - 1;
   size_t right_bound = board_[lower_bound].size() - 1;
 
@@ -62,11 +65,15 @@ vec2 GameBoard::Move(Direction direction) {
 }
 
 void GameBoard::RangedAttack(vec2 position) {
+  if (state_ == kWinGame || state_ == kGameOver) {
+    return;
+  }
   size_t row = static_cast<size_t>(position.y);
   size_t column = static_cast<size_t>(position.x);
   if (player_.GetWeapon(weapon::kRangedWeapon).GetPower() <= 0 ||
   row >= kRows || row < 0 || column >= kColumns || column < 0 ||
-  board_[row][column]->GetTileType() != tile::kEnemy_Tile || static_cast<EnemyTile*>(board_[row][column])->GetValue() <= 0) {
+  (board_[row][column]->GetTileType() != tile::kEnemy_Tile &&  board_[row][column]->GetTileType() != tile::kBoss_Tile) ||
+  static_cast<EnemyTile*>(board_[row][column])->GetValue() <= 0) {
     return;
   } else if (position == (player_location_ + vec2(1,1)) || position == (player_location_ + vec2(-1,-1)) ||
       position == (player_location_ + vec2(-1,1)) || position == (player_location_ + vec2(1,-1))){

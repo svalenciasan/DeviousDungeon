@@ -32,7 +32,7 @@ TileType EnemyTile::GetTileType() {
 ImageSourceRef EnemyTile::GetImage() {
   if (enemy_.GetPower() <= 0) {
     return ci::loadImage("Clear.png");
-  } else if (enemy_.GetPower() <= 9){
+  } else if (tile_type_ == kEnemy_Tile){
     return ci::loadImage("enemies/Hyena.png");
   } else {
     return ci::loadImage("enemies/Boss.png");

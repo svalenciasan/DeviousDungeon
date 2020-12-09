@@ -79,3 +79,107 @@ TEST_CASE("Pickup Weapon", "[weapon]") {
     assert(player.GetWeapon(deviousdungeon::weapon::kRangedWeapon).GetPower() == 2);
   }
 }
+TEST_CASE("Pickup Coins", "[coins]") {
+  Player player;
+  SECTION("No Coins") {
+    assert(player.GetCoins() == 0);
+    player.AddCoins(50);
+    assert(player.GetCoins() == 50);
+  }
+  SECTION("Already have coins") {
+    assert(player.GetCoins() == 0);
+    player.AddCoins(50);
+    assert(player.GetCoins() == 50);
+    player.AddCoins(50);
+    assert(player.GetCoins() == 100);
+  }
+}
+
+TEST_CASE("Use melee", "[melee]") {
+  Player player;
+  SECTION("More damage than health") {
+    Enemy enemy(4);
+    player.UseMelee(enemy);
+
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 0);
+  }
+  SECTION("Same damage as health") {
+    Enemy enemy(3);
+    player.UseMelee(enemy);
+
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 0);
+  }
+  SECTION("Weapon with same damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kMeleeWeapon, 3);
+    player.EquipWeapon(weapon);
+    player.UseMelee(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kMeleeWeapon).GetPower() == 0);
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 3);
+  }
+  SECTION("Weapon with less damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kMeleeWeapon, 2);
+    player.EquipWeapon(weapon);
+    player.UseMelee(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kMeleeWeapon).GetPower() == 0);
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 2);
+  }
+  SECTION("Weapon with more damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kMeleeWeapon, 4);
+    player.EquipWeapon(weapon);
+    player.UseMelee(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kMeleeWeapon).GetPower() == 1);
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 3);
+  }
+}
+
+TEST_CASE("Use ranged", "[ranged]") {
+  Player player;
+  SECTION("No ranged weapon") {
+    Enemy enemy(4);
+    player.UseRanged(enemy);
+
+    assert(enemy.GetPower() == 4);
+    assert(player.GetHealth() == 3);
+  }
+  SECTION("Weapon with same damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kRangedWeapon, 3);
+    player.EquipWeapon(weapon);
+    player.UseRanged(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kRangedWeapon).GetPower() == 0);
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 3);
+  }
+  SECTION("Weapon with less damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kRangedWeapon, 2);
+    player.EquipWeapon(weapon);
+    player.UseRanged(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kRangedWeapon).GetPower() == 0);
+    assert(enemy.GetPower() == 1);
+    assert(player.GetHealth() == 3);
+  }
+  SECTION("Weapon with more damage as enemy") {
+    Enemy enemy(3);
+    Weapon weapon(deviousdungeon::weapon::kRangedWeapon, 4);
+    player.EquipWeapon(weapon);
+    player.UseRanged(enemy);
+
+    assert(player.GetWeapon(deviousdungeon::weapon::kRangedWeapon).GetPower() == 1);
+    assert(enemy.GetPower() == 0);
+    assert(player.GetHealth() == 3);
+  }
+}
