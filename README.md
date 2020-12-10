@@ -1,7 +1,7 @@
 #Devious Dungeon([Inspiration](https://sludgelife.fandom.com/wiki/Crypt_Creeper))
 
 ###Description:
-Devious Dungeon is a randomly generated grid based puzzle game. To run the game just press select the
+Devious Dungeon is a randomly generated grid based puzzle game. To run the game just select the
 "deviousdungeon" configuration and press the run/play button.
 
 #####The goal:
@@ -35,3 +35,8 @@ When the player steps onto an weapon tile they pick up said weapon. If they alre
 #####Enemy Tiles: 
 When the player moves onto a cell with an enemy they take health damage according to 
 (enemy_damage - melee_weapon_value).
+
+#####Uses:
+* VisualStudio 2015
+* Cinder
+* Cmake
