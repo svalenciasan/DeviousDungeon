@@ -15,9 +15,11 @@ class EnemyTile : public Tile {
   EnemyTile(Enemy enemy);
 
   void OnEnter(Player& player);
+
   int GetValue() const;
   TileType GetTileType() override;
   ImageSourceRef GetImage() override;
+  Enemy& GetEnemy();
  private:
   Enemy enemy_;
   TileType tile_type_ = kEnemy_Tile;

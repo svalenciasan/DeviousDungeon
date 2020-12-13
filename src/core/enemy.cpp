@@ -15,7 +15,7 @@ int Enemy::GetPower() const{
 }
 
 int Enemy::SetPower(int power) {
-  power_ -= power;
+  power_ = power;
   return power_;
 }
 }//namespace enemy

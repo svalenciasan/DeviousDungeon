@@ -12,6 +12,7 @@ DeviousDungeonApp::DeviousDungeonApp() {
 }
 
 void DeviousDungeonApp::update() {
+  desert_sound_->start();
   tile_board_.UpdateBounds(vec2(kSideMargin, kUpperMargin),
                            vec2(kWindowSize - kSideMargin, kWindowSize - kLowerMargin));
 }
@@ -48,7 +49,14 @@ void DeviousDungeonApp::keyDown(ci::app::KeyEvent event) {
     case ci::app::KeyEvent::KEY_d:
       tile_board_.HandleMovement(gameboard::kRight);
       break;
+    case ci::app::KeyEvent::KEY_r:
+      game_board_ = GameBoard(kBoardSize, kBoardSize);
+      break;
   }
+}
+
+void DeviousDungeonApp::mouseDown(ci::app::MouseEvent event) {
+  tile_board_.HandleRanged(event.getPos());
 }
 
 /**
@@ -58,11 +66,13 @@ void DeviousDungeonApp::keyDown(ci::app::KeyEvent event) {
 void DeviousDungeonApp::DrawGameOver() {
   auto font = ci::Font("", 100);
   ci::gl::drawStringCentered("Game Over", vec2(kWindowSize / 2, kUpperMargin), ci::Color("black"), font);
+  ci::gl::drawStringCentered("Score: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("black"), font);
 }
 
 void DeviousDungeonApp::DrawWinningGame() {
   auto font = ci::Font("", 100);
   ci::gl::drawStringCentered("Win", vec2(kWindowSize / 2, kUpperMargin), ci::Color("black"), font);
+  ci::gl::drawStringCentered("Score: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize / 2, kWindowSize / 2), ci::Color("black"), font);
 }
 
 void DeviousDungeonApp::DrawUI() {
@@ -71,10 +81,9 @@ void DeviousDungeonApp::DrawUI() {
 
   ci::gl::color(ci::Color("beige"));
   ci::gl::drawSolidRect(ci::Rectf(top_left, bottom_right));
-  //ci::gl::drawStrokedRect(ci::Rectf(top_left, bottom_right));
 
   auto font = ci::Font("", 30);
-  ci::gl::drawStringRight("SCORE: " + std::to_string(game_board_.GetLevel()), vec2(kWindowSize - kSideMargin, 50), ci::Color("black"), font);
+  ci::gl::drawStringRight("SCORE: " + std::to_string(game_board_.GetScore()), vec2(kWindowSize - kSideMargin, 50), ci::Color("black"), font);
   DrawBottomUI(vec2(0, kWindowSize - kLowerMargin), vec2(kWindowSize, kWindowSize));
 }
 
@@ -115,6 +124,33 @@ void DeviousDungeonApp::DrawBottomUI(vec2 top_left, vec2 bottom_right) {
     empty_health--;
   }
   //WEAPON UI
+  double equipped_weapon_size = horizontal_length / 12;
+  ImageSourceRef melee_weapon = ci::loadImage("weapons/Sword.png");
+  ImageSourceRef ranged_weapon = ci::loadImage("weapons/Bow.png");
+
+  vec2 top_left_weapon_bound(top_left.x + horizontal_margins, top_left.y + vertical_length * .5);
+  vec2 bottom_right_weapon_bound = top_left_weapon_bound + vec2(equipped_weapon_size, equipped_weapon_size);
+  ci::Rectf weapon_bounds(top_left_weapon_bound, bottom_right_weapon_bound);
+
+  Weapon melee = game_board_.GetPlayer().GetWeapon(weapon::kMeleeWeapon);
+  Weapon ranged = game_board_.GetPlayer().GetWeapon(weapon::kRangedWeapon);
+
+  if (melee.GetPower() > 0) {
+    ci::gl::draw(ci::gl::Texture2d::create(melee_weapon), weapon_bounds);
+    int value = melee.GetPower();
+    string value_str = std::to_string(value);
+    ci::gl::drawStringRight(value_str, bottom_right_weapon_bound + vec2(0, -20), ci::Color("black"), font);
+  }
+  if (ranged.GetPower() > 0) {
+    top_left_weapon_bound += vec2(equipped_weapon_size * 1.5, 0);
+    bottom_right_weapon_bound += vec2(equipped_weapon_size * 1.5, 0);
+    weapon_bounds = ci::Rectf(top_left_weapon_bound, bottom_right_weapon_bound);
+
+    ci::gl::draw(ci::gl::Texture2d::create(ranged_weapon), weapon_bounds);
+    int value = ranged.GetPower();
+    string value_str = std::to_string(value);
+    ci::gl::drawStringRight(value_str, bottom_right_weapon_bound + vec2(0, -20), ci::Color("black"), font);
+  }
 }
 
 }//namespace visualizer

@@ -16,7 +16,8 @@ enum TileType {
   kEnemy_Tile,
   kWeapon_Tile,
   kHealth_Tile,
-  kGold_Tile
+  kGold_Tile,
+  kBoss_Tile
 };
 class Tile {
  public:

@@ -21,6 +21,9 @@ int Player::UseMelee(Enemy& enemy) {
   int power_difference = enemy.GetPower() - melee_weapon_.GetPower();
   if (power_difference >= 0) {
     current_health_ -= power_difference;
+    if (current_health_ < 0) {
+      current_health_ = 0;
+    }
     enemy.SetPower(0);
     melee_weapon_.SetPower(0);
     return 0;
@@ -35,6 +38,7 @@ int Player::UseRanged(Enemy& enemy) {
   int power_difference = enemy.GetPower() - ranged_weapon_.GetPower();
   if (power_difference >= 0) {
     enemy.SetPower(power_difference);
+    ranged_weapon_.SetPower(0);
     return ranged_weapon_.GetPower();
   } else {
     ranged_weapon_.SetPower(abs(power_difference));
@@ -77,6 +81,10 @@ void Player::EquipWeapon(Weapon& weapon) {
      default:
        return ranged_weapon_;
    }
+ }
+
+ int Player::GetCoins() const{
+   return coins_;
  }
 }//namespace player
 }//namespace deviousdungeon

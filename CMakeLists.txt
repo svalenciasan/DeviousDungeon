@@ -69,6 +69,7 @@ list(APPEND SOURCE_FILES    ${CORE_SOURCE_FILES}
 
 list(APPEND TEST_FILES tests/test_player.cpp)
 list(APPEND TEST_FILES tests/test_game_board.cpp)
+list(APPEND TEST_FILES tests/test_procedural_generation.cpp)
 
 ci_make_app(
         APP_NAME        deviousdungeon

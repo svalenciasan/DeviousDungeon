@@ -47,13 +47,14 @@ class GameBoard {
   GameBoard() = default;
   //Creates a board with those dimensions.
   GameBoard(const size_t rows, const size_t columns);
+  GameBoard(vector<vector<Tile*>>& board);
   /**
    * Changes player location.
    * @param direction
    * @return
    */
   vec2 Move(Direction direction);
-
+  void RangedAttack(vec2 position);
   /**
    * Getters/Setters.
    */
@@ -62,6 +63,7 @@ class GameBoard {
   size_t GetRows() const;
   size_t GetColumns() const;
   size_t GetLevel() const;
+  size_t GetScore() const;
   vec2 GetPlayerLocation() const;
   Player GetPlayer() const;
 
@@ -76,11 +78,23 @@ class GameBoard {
   //X component corresponds to the column while y component corresponds to the row.
   vec2 player_location_;
   vector<vector<Tile*>> board_;
+
+  ci::audio::VoiceRef bow_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("bowsound.mp3")));
+  ci::audio::VoiceRef sword_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("swordsound.mp3")));
+  ci::audio::VoiceRef pickup_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("pickupsound.mp3")));
+  ci::audio::VoiceRef heal_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("potionsound.mp3")));
+  ci::audio::VoiceRef coin_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("coinsound.mp3")));
+  ci::audio::VoiceRef portal_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("portalsound.mp3")));
+  ci::audio::VoiceRef death_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("deathsound.mp3")));
+  ci::audio::VoiceRef win_sound_ = ci::audio::Voice::create(ci::audio::load(ci::app::loadAsset("winsound.mp3")));
+
+
   /**
    * Turns a tile into an kEmptyTile.
    * @param location
    * @return
    */
+
   vec2 MakeEmptyTile(vec2 location);
   void OnEnter(vec2 location);
   void GenerateNextLevel();

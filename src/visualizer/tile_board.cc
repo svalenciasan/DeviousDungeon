@@ -42,6 +42,16 @@ void TileBoard::Draw() const {
           break;
         }
 
+        case tile::kBoss_Tile: {
+          EnemyTile *enemy_tile = static_cast<EnemyTile *>(board[row][column]);
+          int value = enemy_tile->GetValue();
+          string value_str = std::to_string(value);
+
+          //texture_font_->drawString(value_str, bottom_right_picture_bound);
+          ci::gl::drawStringRight(value_str, bottom_right_picture_bound + vec2(0, -20), ci::Color("black"), font_);
+          break;
+        }
+
         case tile::kEnemy_Tile: {
           EnemyTile *enemy_tile = static_cast<EnemyTile *>(board[row][column]);
           int value = enemy_tile->GetValue();
@@ -82,6 +92,14 @@ void TileBoard::Draw() const {
 
 void TileBoard::HandleMovement(gameboard::Direction direction) {
   game_board_->Move(direction);
+}
+
+void TileBoard::HandleRanged(vec2 position) {
+  vec2 board_coords =
+      ((position - top_left_corner_) / (float)tile_pixel_length_);
+      (position - top_left_corner_) / (float)tile_pixel_length_;
+  board_coords = vec2(floor(board_coords.x), floor(board_coords.y));
+  game_board_->RangedAttack(board_coords);
 }
 }//namespace visualizer
 

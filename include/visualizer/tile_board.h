@@ -3,13 +3,16 @@
 #include "cinder/gl/gl.h"
 #include "cinder/Font.h"
 #include "cinder/gl/TextureFont.h"
+#include "cinder/audio/audio.h"
+#include "cinder/app/RendererGl.h"
+#include "cinder/app/App.h"
 #include "core/game_board.h"
 #include <iostream>
 #include <string>
 
+
 using std::string;
 using deviousdungeon::gameboard::GameBoard;
-//using ci::gl::Texture;
 
 namespace deviousdungeon {
 
@@ -29,6 +32,7 @@ class TileBoard {
   void Draw() const;
 
   void HandleMovement(gameboard::Direction direction);
+  void HandleRanged(vec2 position);
 
   void UpdateBounds(vec2 top_left_corner, vec2 bottom_right_corner);
  private:

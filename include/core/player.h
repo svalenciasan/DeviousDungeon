@@ -3,6 +3,9 @@
 #include "cinder/gl/gl.h"
 #include "weapon.h"
 #include "enemy.h"
+#include "cinder/audio/audio.h"
+#include "cinder/app/RendererGl.h"
+#include "cinder/app/App.h"
 
 using deviousdungeon::weapon::Weapon;
 using deviousdungeon::enemy::Enemy;
@@ -26,6 +29,7 @@ class Player {
   int UseRanged(Enemy& enemy);
   void EquipWeapon(Weapon& weapon);
   int AddCoins(int coins);
+  int GetCoins() const;
   int Heal(int heal);
   int GetHealth()const;
   int GetMaxHealth()const;
